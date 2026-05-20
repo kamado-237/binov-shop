@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B-inov | Mode Femme au Cameroun</title>
+  <meta name="description" content="Boutique en ligne féminine au Cameroun - Sacs, Chaussures et Vêtements tendance. Livraison à Yaoundé et Douala. Commande WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1A1410">
+  <!-- Favicon emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👜</text></svg>">
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<div id="topbar">
+  🚚 Livraison Yaoundé & Douala | Commandez sur <a href="https://wa.me/237696351911" target="_blank">📱 WhatsApp: 696 351 911</a>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <span>B</span>-inov
+      <span class="logo-sub">Mode Féminine</span>
+    </a>
+
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Rechercher sacs, chaussures, vêtements..." autocomplete="off">
+      <button onclick="renderProducts(currentFilter, document.getElementById('searchInput').value)">🔍</button>
+    </div>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <!-- Admin bouton (discret) -->
+      <button class="icon-btn" onclick="openAdmin()" title="Gestion boutique">
+        ⚙️
+      </button>
+      <!-- Favoris -->
+      <button class="icon-btn" onclick="renderProducts('all', ''); setFilter('all')" title="Accueil">
+        🏠
+      </button>
+      <!-- Panier -->
+      <button class="icon-btn" onclick="openCart()" title="Mon panier">
+        🛒
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-link active" id="nav-all" onclick="setFilter('all')">Tout voir</a>
+    <a class="nav-link" id="nav-sacs" onclick="setFilter('sacs')">👜 Sacs</a>
+    <a class="nav-link" id="nav-chaussures" onclick="setFilter('chaussures')">👠 Chaussures</a>
+    <a class="nav-link" id="nav-vetements" onclick="setFilter('vetements')">👗 Vêtements</a>
+    <a class="nav-link" onclick="filterPromo()">🏷️ Promotions</a>
+    <a class="nav-link" onclick="filterNew()">✨ Nouveautés</a>
+  </div>
+</nav>
+
+<!-- ===== HERO CINEMATIC ===== -->
+<section class="hero-cinema" id="heroSection">
+  <!-- Slideshow background -->
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1600&q=80&auto=format&fit=crop')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600&q=80&auto=format&fit=crop')"></div>
+  </div>
+  <!-- Overlay gradient -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-cinema-inner">
+    <div class="hero-cinema-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        Collection 2026
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="hero-cinema-title">
+        L'art de vous<br>
+        <em>sublimer</em>
+      </h1>
+      <p class="hero-cinema-desc">
+        Sacs, chaussures &amp; vêtements pensés pour la femme moderne.<br>
+        Livraison Yaoundé · Douala · Partout au Cameroun.
+      </p>
+      <div class="hero-cinema-btns">
+        <button class="btn-cinema-primary" onclick="scrollToShop()">
+          Découvrir la collection
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <a href="https://wa.me/237696351911" target="_blank" class="btn-cinema-wa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          696 351 911
+        </a>
+      </div>
+      <div class="hero-cinema-stats">
+        <div class="cinema-stat">
+          <span class="cinema-stat-val">500+</span>
+          <span class="cinema-stat-lbl">Clientes</span>
+        </div>
+        <div class="cinema-stat-divider"></div>
+        <div class="cinema-stat">
+          <span class="cinema-stat-val">3</span>
+          <span class="cinema-stat-lbl">Catégories</span>
+        </div>
+        <div class="cinema-stat-divider"></div>
+        <div class="cinema-stat">
+          <span class="cinema-stat-val">24H</span>
+          <span class="cinema-stat-lbl">Livraison</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide dots -->
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goToSlide(0)"></button>
+    <button class="hero-dot" onclick="goToSlide(1)"></button>
+    <button class="hero-dot" onclick="goToSlide(2)"></button>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" onclick="scrollToShop()">
+    <span>Défiler</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES IMMERSIVES ===== -->
+<section class="cat-section">
+  <div class="cat-grid">
+
+    <div class="cat-card cat-large" onclick="setFilter('sacs')">
+      <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-tag">Collection</div>
+        <h3 class="cat-title">Sacs &amp; Maroquinerie</h3>
+        <p class="cat-sub">Cabas · Pochettes · Bandoulières</p>
+        <div class="cat-cta">Voir la sélection <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </div>
+    </div>
+
+    <div class="cat-stack">
+      <div class="cat-card" onclick="setFilter('chaussures')">
+        <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Tendance</div>
+          <h3 class="cat-title">Chaussures</h3>
+          <p class="cat-sub">Escarpins · Sandales · Baskets</p>
+          <div class="cat-cta">Découvrir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="setFilter('vetements')">
+        <div class="cat-img" style="background-image:url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80&auto=format&fit=crop')"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-content">
+          <div class="cat-tag">Nouveautés</div>
+          <h3 class="cat-title">Vêtements</h3>
+          <p class="cat-sub">Robes · Blazers · Ensembles</p>
+          <div class="cat-cta">Explorer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== BANDEAU MANIFESTE ===== -->
+<div class="manifesto-band">
+  <div class="manifesto-inner">
+    <div class="manifesto-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Livraison Yaoundé &amp; Douala
+    </div>
+    <div class="manifesto-dot"></div>
+    <div class="manifesto-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Qualité garantie
+    </div>
+    <div class="manifesto-dot"></div>
+    <div class="manifesto-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Paiement à la livraison
+    </div>
+    <div class="manifesto-dot"></div>
+    <div class="manifesto-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Commande en 2 minutes
+    </div>
+  </div>
+</div>
+
+<!-- ===== CATALOGUE PRINCIPAL ===== -->
+<div class="section" id="shopSection">
+  <div class="section-head">
+    <div>
+      <h2 class="section-title">Notre <span>Catalogue</span></h2>
+      <div class="section-sub" id="catalogSubtitle">Tous nos articles disponibles</div>
+    </div>
+    <a class="see-all" onclick="setFilter('all')">Tout voir →</a>
+  </div>
+
+  <!-- Filtres & tri -->
+  <div class="filters-bar">
+    <button class="filter-btn active" id="filter-all" onclick="setFilter('all')">Tous les articles</button>
+    <button class="filter-btn" id="filter-sacs" onclick="setFilter('sacs')">👜 Sacs</button>
+    <button class="filter-btn" id="filter-chaussures" onclick="setFilter('chaussures')">👠 Chaussures</button>
+    <button class="filter-btn" id="filter-vetements" onclick="setFilter('vetements')">👗 Vêtements</button>
+    <select class="sort-select" id="sortSelect">
+      <option value="default">Trier par défaut</option>
+      <option value="price-asc">Prix croissant</option>
+      <option value="price-desc">Prix décroissant</option>
+      <option value="new">Nouveautés d'abord</option>
+      <option value="promo">Promotions d'abord</option>
+    </select>
+  </div>
+
+  <!-- Grille de produits -->
+  <div class="product-grid" id="productsGrid">
+    <!-- Rendu par JavaScript -->
+  </div>
+</div>
+
+<!-- ===== SECTION CTA IMMERSIVE ===== -->
+<section class="cta-immersive">
+  <div class="cta-bg" style="background-image:url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80&auto=format&fit=crop')"></div>
+  <div class="cta-overlay"></div>
+  <div class="cta-inner">
+    <div class="cta-badge">Commander maintenant</div>
+    <h2 class="cta-title">Simple comme un message<br><em>WhatsApp</em></h2>
+    <p class="cta-desc">Parcourez, ajoutez au panier, et on s'occupe du reste.<br>Livraison rapide dans toutes les grandes villes du Cameroun.</p>
+    <a href="https://wa.me/237696351911?text=Bonjour%20B-inov%20!%20Je%20souhaite%20commander." target="_blank" class="btn-cta-wa">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Commander sur WhatsApp
+    </a>
+    <div class="cta-contact">696 351 911 · Lun–Dim · 8h–20h</div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <!-- À propos -->
+      <div>
+        <div class="footer-logo"><span>B</span>-inov</div>
+        <div class="footer-desc">
+          Votre boutique de mode féminine au Cameroun. 
+          Sacs, chaussures et vêtements de qualité livrés chez vous rapidement.
+        </div>
+        <div class="footer-social">
+          <a href="https://wa.me/237696351911" target="_blank" class="social-icon" title="WhatsApp">📱</a>
+          <div class="social-icon" title="Instagram">📸</div>
+          <div class="social-icon" title="Facebook">👍</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <div class="footer-title">Catégories</div>
+        <div class="footer-links">
+          <a onclick="setFilter('sacs')">👜 Sacs à main</a>
+          <a onclick="setFilter('chaussures')">👠 Chaussures</a>
+          <a onclick="setFilter('vetements')">👗 Vêtements</a>
+          <a onclick="filterNew()">✨ Nouveautés</a>
+          <a onclick="filterPromo()">🏷️ Promotions</a>
+        </div>
+      </div>
+
+      <!-- Infos -->
+      <div>
+        <div class="footer-title">Informations</div>
+        <div class="footer-links">
+          <a href="#">À propos de nous</a>
+          <a href="#">Politique de retour</a>
+          <a href="#">Conditions de vente</a>
+          <a href="#">Livraison</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <a href="https://wa.me/237696351911" target="_blank">📱 WhatsApp: 696 351 911</a>
+          <a href="#">📍 Douala, Cameroun</a>
+          <a href="#">🕐 Lun–Dim: 8h–20h</a>
+          <a href="#">📦 Livraison 24–48h</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 B-inov. Tous droits réservés.</span>
+      <span>Mode Féminine au Cameroun 🇨🇲</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== PANIER SIDEBAR ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-head">
+    <h3>🛒 Mon Panier</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span class="cart-total-val" id="cartTotal">0 FCFA</span>
+    </div>
+    <button class="btn-whatsapp" onclick="orderViaWhatsApp()">
+      💬 Commander via WhatsApp
+    </button>
+    <div style="text-align:center; font-size:12px; color:var(--gris); margin-top:8px;">
+      Votre commande sera envoyée au 696 351 911
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL PRODUIT ===== -->
+<div class="product-modal-overlay" id="productModalOverlay">
+  <div class="product-modal" style="position:relative;">
+    <button class="modal-close" onclick="closeProductModal()">✕</button>
+    <div id="productModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== ADMIN PANEL ===== -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal">
+    <div class="admin-head">
+      <h3>⚙️ <span>Gestion Boutique</span></h3>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="adminLogout()" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:6px 14px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;">🔒 Déconnexion</button>
+        <button class="cart-close" onclick="closeAdmin()">✕</button>
+      </div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="add" onclick="showAdminTab('add')">➕ Ajouter article</button>
+        <button class="admin-tab" data-tab="manage" onclick="showAdminTab('manage')">📦 Gérer le catalogue</button>
+      </div>
+      <div id="adminContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+<div class="whatsapp-float">
+  <div class="whatsapp-bubble">Commandez ici 👇</div>
+  <a href="https://wa.me/237696351911?text=Bonjour%20%C3%89l%C3%A9gance%20Boutique%20!%20Je%20veux%20commander." 
+     target="_blank" class="whatsapp-btn" title="Commander sur WhatsApp">
+    💬
+  </a>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== SCRIPT ===== -->
+<script src="js/app.js"></script>
+<script>
+  // Navigation filtre
+  function setFilter(cat) {
+    currentFilter = cat;
+    currentSearch = '';
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.value = '';
+
+    // Nav links
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + cat);
+    if (navEl) navEl.classList.add('active');
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const filterEl = document.getElementById('filter-' + cat);
+    if (filterEl) filterEl.classList.add('active');
+
+    // Subtitle
+    const labels = { all: 'Tous nos articles', sacs: 'Notre collection de sacs', chaussures: 'Notre collection de chaussures', vetements: 'Notre collection de vêtements' };
+    const sub = document.getElementById('catalogSubtitle');
+    if (sub) sub.textContent = labels[cat] || '';
+
+    renderProducts(cat, '');
+    scrollToShop();
+  }
+
+  function filterPromo() {
+    const products = getProducts().filter(p => p.promo);
+    const grid = document.getElementById('productsGrid');
+    const sub = document.getElementById('catalogSubtitle');
+    if (sub) sub.textContent = `${products.length} articles en promotion`;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    currentFilter = 'all';
+    currentSearch = '';
+    // Rendre uniquement les promos
+    if (!grid) return;
+    if (products.length === 0) {
+      grid.innerHTML = `<div class="no-products"><span class="icon">🏷️</span>Aucune promotion en ce moment.</div>`;
+    } else {
+      currentFilter = '__promo__';
+      renderProducts('all', '');
+      // Override pour montrer que les promos
+      const allProds = getProducts().filter(p => p.promo);
+      grid.innerHTML = allProds.map(p => {
+        const disc = discount(p.oldPrice, p.price);
+        const liked = isLiked(p.id);
+        return `
+          <div class="product-card" onclick="openProductModal(${p.id})">
+            <div class="product-img-placeholder"><span>${p.emoji}</span><small>${catLabel(p.category)}</small></div>
+            <div class="product-badges">${disc ? `<span class="badge-promo">-${disc}%</span>` : ''}<span class="badge-promo">PROMO</span></div>
+            <div class="product-actions" onclick="event.stopPropagation()">
+              <button class="action-btn ${liked ? 'liked' : ''}" onclick="toggleLike(${p.id})">${liked ? '❤️' : '🤍'}</button>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">${catLabel(p.category)}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.description.substring(0, 65)}...</div>
+              <div class="product-price-row">
+                <div><div class="price-new">${formatPrice(p.price)}</div>${p.oldPrice ? `<div class="price-old">${formatPrice(p.oldPrice)}</div>` : ''}</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 Ajouter</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    scrollToShop();
+  }
+
+  function filterNew() {
+    const sub = document.getElementById('catalogSubtitle');
+    if (sub) sub.textContent = 'Les dernières nouveautés';
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const allNew = getProducts().filter(p => p.isNew);
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
+    if (allNew.length === 0) {
+      grid.innerHTML = `<div class="no-products"><span class="icon">✨</span>Aucune nouveauté disponible.</div>`;
+    } else {
+      grid.innerHTML = allNew.map(p => {
+        const liked = isLiked(p.id);
+        return `
+          <div class="product-card" onclick="openProductModal(${p.id})">
+            <div class="product-img-placeholder"><span>${p.emoji}</span><small>${catLabel(p.category)}</small></div>
+            <div class="product-badges"><span class="badge-new">NEW</span></div>
+            <div class="product-actions" onclick="event.stopPropagation()">
+              <button class="action-btn ${liked ? 'liked' : ''}" onclick="toggleLike(${p.id})">${liked ? '❤️' : '🤍'}</button>
+            </div>
+            <div class="product-info">
+              <div class="product-cat">${catLabel(p.category)}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.description.substring(0, 65)}...</div>
+              <div class="product-price-row">
+                <div><div class="price-new">${formatPrice(p.price)}</div>${p.oldPrice ? `<div class="price-old">${formatPrice(p.oldPrice)}</div>` : ''}</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart(${p.id})">🛒 Ajouter</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    scrollToShop();
+  }
+
+  function scrollToShop() {
+    const el = document.getElementById('shopSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+
+<script>
+  // ---- Slideshow Hero ----
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  // Auto-avance toutes les 6 secondes
+  setInterval(nextSlide, 6000);
+</script>
+
+</body>
+</html>
